@@ -231,7 +231,7 @@ SET(WRITE_FILE "")
 FOREACH(FILE ${SOURCE_FILES})
   SET(WRITE_FILE "${WRITE_FILE}${FILE}\n")
 ENDFOREACH(FILE)
-FILE(WRITE ${CMAKE_BINARY_DIR}/file_list.txt "${WRITE_FILE}")
+FILE(WRITE ${FORTE_BINARY_DIR}/file_list.txt "${WRITE_FILE}")
 
 ######################################################################################
 # Architecutre to build forte on

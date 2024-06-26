@@ -13,7 +13,7 @@
 MESSAGE("Generate Initfunction")
 MESSAGE("Source Dir: ${FORTE_SOURCE_DIR}")
 MESSAGE("Binary Dir: ${FORTE_BINARY_DIR}")
-FILE(STRINGS ${CMAKE_BINARY_DIR}/../file_list.txt FILE_NAMES)
+FILE(STRINGS ${FORTE_BINARY_DIR}/../file_list.txt FILE_NAMES)
 
 #######################################################################################
 # Create Forte-Executeable with all Functionblocks

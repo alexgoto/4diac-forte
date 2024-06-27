@@ -152,9 +152,9 @@ FOREACH(POS RANGE ${LAYER_CLASS_LEN}-1)
   SET(LAYERMANAGER_INSTANCE "${LAYERMANAGER_INSTANCE}if(0 == strcmp(\"${CONFIGNAME}\", pa_acLayerIdentifier)){\n    m_poNewLayer = new ${CLASS}(pa_poUpperLayer, pa_poComFB);\n  }\n")
 ENDFOREACH(POS)
 
-CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/core/cominfra/comlayersmanager.cpp.in ${CMAKE_BINARY_DIR}/core/cominfra/comlayersmanager_new.cpp)
-forte_replacefile_if_changed(${CMAKE_BINARY_DIR}/core/cominfra/comlayersmanager_new.cpp ${CMAKE_BINARY_DIR}/core/cominfra/comlayersmanager.cpp)
-file(REMOVE ${CMAKE_BINARY_DIR}/core/cominfra/comlayersmanager_new.cpp)
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/core/cominfra/comlayersmanager.cpp.in ${PROJECT_BINARY_DIR}/core/cominfra/comlayersmanager_new.cpp)
+forte_replacefile_if_changed(${PROJECT_BINARY_DIR}/core/cominfra/comlayersmanager_new.cpp ${PROJECT_BINARY_DIR}/core/cominfra/comlayersmanager.cpp)
+file(REMOVE ${PROJECT_BINARY_DIR}/core/cominfra/comlayersmanager_new.cpp)
 
 #############################################################################
 # Configure Handlers

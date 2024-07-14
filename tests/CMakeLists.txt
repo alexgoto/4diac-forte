@@ -70,7 +70,7 @@ forte_test_add_subdirectory(stdfblib)
 # set library path
 #######################################################################################
 forte_test_add_link_directories(${FORTE_TESTS_LINK_DIRS})
-forte_test_add_link_directories(${CMAKE_BINARY_DIR}/src)
+forte_test_add_link_directories(${PROJECT_BINARY_DIR}/src)
 
 get_property(LINK_DIRECTORIES GLOBAL PROPERTY FORTE_LINK_DIRECTORIES)
 GET_PROPERTY(FORTE_TEST_LINK_DIR GLOBAL PROPERTY FORTE_TEST_LINK_DIRECTORIES)
@@ -99,7 +99,7 @@ SET(WRITE_FILE "")
 FOREACH(FILE ${SOURCE_CPP} ${SOURCE_H})
   SET(WRITE_FILE "${WRITE_FILE}${FILE}\n")
 ENDFOREACH(FILE)
-FILE(WRITE ${CMAKE_BINARY_DIR}/file_test_list.txt "${WRITE_FILE}")
+FILE(WRITE ${PROJECT_BINARY_DIR}/file_test_list.txt "${WRITE_FILE}")
   
 #######################################################################################
 # Create Exe File

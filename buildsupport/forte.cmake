@@ -344,7 +344,7 @@ ENDFUNCTION(forte_add_systemtest_soft)
 # forte_add_multi_systemtests (TEST_NAME TIMEOUT IS_HARD FILE_NAME EXTRA_ARGS [FILE_NAME EXTRA_ARGS] ...)
 FUNCTION(forte_add_multi_systemtests)
    
-  FILE(TO_NATIVE_PATH "${CMAKE_SOURCE_DIR}/buildsupport/multi_test.cmake" scriptFile)
+  FILE(TO_NATIVE_PATH "${PROJECT_SOURCE_DIR}/buildsupport/multi_test.cmake" scriptFile)
   STRING(REPLACE "\\" "\\\\" scriptFile ${scriptFile})
 
   LIST(GET ARGV 0 TEST_NAME)

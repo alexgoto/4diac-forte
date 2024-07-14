@@ -47,10 +47,10 @@ if("${FORTE_ARCHITECTURE}" STREQUAL "Bachmann M1")
   
   forte_add_link_flags("-Wl,-M -Wl,-Map -Wl,forte.map -Wl,-cref")
   
-  CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/forte.ver.in ${CMAKE_BINARY_DIR}/forte.new.ver)
-  forte_replacefile_if_changed(${CMAKE_BINARY_DIR}/forte.new.ver ${CMAKE_BINARY_DIR}/forte.ver)
-  CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/CPPLIB.ver.in ${CMAKE_BINARY_DIR}/CPPLIB.new.ver)
-  forte_replacefile_if_changed(${CMAKE_BINARY_DIR}/CPPLIB.new.ver ${CMAKE_BINARY_DIR}/CPPLIB.ver)
+  CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/forte.ver.in ${PROJECT_BINARY_DIR}/forte.new.ver)
+  forte_replacefile_if_changed(${PROJECT_BINARY_DIR}/forte.new.ver ${PROJECT_BINARY_DIR}/forte.ver)
+  CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/CPPLIB.ver.in ${PROJECT_BINARY_DIR}/CPPLIB.new.ver)
+  forte_replacefile_if_changed(${PROJECT_BINARY_DIR}/CPPLIB.new.ver ${PROJECT_BINARY_DIR}/CPPLIB.ver)
   
   
   set(GNU_TOOLS C:/bachmann/SolutionCenter/V1.70Release/cutils/GnuTools)

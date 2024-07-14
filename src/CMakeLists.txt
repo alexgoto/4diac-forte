@@ -24,7 +24,7 @@ foreach(FORTE_MODULE_DIR ${FORTE_MODULE_LIST})
   endif()
 endforeach(FORTE_MODULE_DIR)
 if(EXISTS ${FORTE_EXTERNAL_MODULES_DIRECTORY})
-  INCLUDE(${CMAKE_BINARY_DIR}/src/external/CMakeLists.txt)
+  INCLUDE(${PROJECT_BINARY_DIR}/src/external/CMakeLists.txt)
 endif()
 forte_add_subdirectory(stdfblib)
 
@@ -152,9 +152,9 @@ FOREACH(POS RANGE ${LAYER_CLASS_LEN}-1)
   SET(LAYERMANAGER_INSTANCE "${LAYERMANAGER_INSTANCE}if(0 == strcmp(\"${CONFIGNAME}\", pa_acLayerIdentifier)){\n    m_poNewLayer = new ${CLASS}(pa_poUpperLayer, pa_poComFB);\n  }\n")
 ENDFOREACH(POS)
 
-CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/core/cominfra/comlayersmanager.cpp.in ${CMAKE_BINARY_DIR}/core/cominfra/comlayersmanager_new.cpp)
-forte_replacefile_if_changed(${CMAKE_BINARY_DIR}/core/cominfra/comlayersmanager_new.cpp ${CMAKE_BINARY_DIR}/core/cominfra/comlayersmanager.cpp)
-file(REMOVE ${CMAKE_BINARY_DIR}/core/cominfra/comlayersmanager_new.cpp)
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/core/cominfra/comlayersmanager.cpp.in ${PROJECT_BINARY_DIR}/core/cominfra/comlayersmanager_new.cpp)
+forte_replacefile_if_changed(${PROJECT_BINARY_DIR}/core/cominfra/comlayersmanager_new.cpp ${PROJECT_BINARY_DIR}/core/cominfra/comlayersmanager.cpp)
+file(REMOVE ${PROJECT_BINARY_DIR}/core/cominfra/comlayersmanager_new.cpp)
 
 #############################################################################
 # Configure Handlers
@@ -189,9 +189,9 @@ math(EXPR HANDLER_CLASS_LEN_ORIGINAL ${HANDLER_CLASS_LEN_ORIGINAL}+1)
 SET(FORTE_NUMBER_OF_HANDLERS ${HANDLER_CLASS_LEN_ORIGINAL} PARENT_SCOPE)
 
 
-CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/core/deviceExecutionHandlers.cpp.in ${CMAKE_BINARY_DIR}/core/deviceExecutionHandlers_new.cpp)
-forte_replacefile_if_changed(${CMAKE_BINARY_DIR}/core/deviceExecutionHandlers_new.cpp ${CMAKE_BINARY_DIR}/core/deviceExecutionHandlers.cpp)
-file(REMOVE ${CMAKE_BINARY_DIR}/core/deviceExecutionHandlers_new.cpp)
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/core/deviceExecutionHandlers.cpp.in ${PROJECT_BINARY_DIR}/core/deviceExecutionHandlers_new.cpp)
+forte_replacefile_if_changed(${PROJECT_BINARY_DIR}/core/deviceExecutionHandlers_new.cpp ${PROJECT_BINARY_DIR}/core/deviceExecutionHandlers.cpp)
+file(REMOVE ${PROJECT_BINARY_DIR}/core/deviceExecutionHandlers_new.cpp)
 
 
 #############################################################################
@@ -231,7 +231,7 @@ SET(WRITE_FILE "")
 FOREACH(FILE ${SOURCE_FILES})
   SET(WRITE_FILE "${WRITE_FILE}${FILE}\n")
 ENDFOREACH(FILE)
-FILE(WRITE ${CMAKE_BINARY_DIR}/file_list.txt "${WRITE_FILE}")
+FILE(WRITE ${PROJECT_BINARY_DIR}/file_list.txt "${WRITE_FILE}")
 
 ######################################################################################
 # Architecutre to build forte on
@@ -292,7 +292,7 @@ endif(FORTE_BUILD_SHARED_LIBRARY)
 #######################################################################################
 
 #forte init is needed for the temporary forte library, which then is linked to the main.cpp
-ADD_CUSTOM_TARGET(forte_init_generator COMMAND ${CMAKE_COMMAND} -DFORTE_BINARY_DIR:STRING="${CMAKE_BINARY_DIR}" -DFORTE_SOURCE_DIR:STRING="${CMAKE_SOURCE_DIR}" -DFORTE_USE_64BIT_DATATYPES:STRING="${FORTE_USE_64BIT_DATATYPES}" -DFORTE_USE_REAL_DATATYPE:STRING="${FORTE_USE_REAL_DATATYPE}" -DFORTE_USE_LREAL_DATATYPE:STRING="${FORTE_USE_LREAL_DATATYPE}" -DFORTE_SUPPORT_ARRAYS:STRING="${FORTE_SUPPORT_ARRAYS}" -DFORTE_LITTLE_ENDIAN:STRING=${FORTE_LITTLE_ENDIAN} -DFORTE_BIG_ENDIAN:STRING=${FORTE_BIG_ENDIAN} -DFORTE_LOGLEVEL:STRING="${FORTE_LOGLEVEL}" -P ${FORTE_BUILDSUPPORT_DIRECTORY}/generate_init.cmake)  #
+ADD_CUSTOM_TARGET(forte_init_generator COMMAND ${CMAKE_COMMAND} -DFORTE_BINARY_DIR:STRING="${PROJECT_BINARY_DIR}" -DFORTE_SOURCE_DIR:STRING="${PROJECT_SOURCE_DIR}" -DFORTE_USE_64BIT_DATATYPES:STRING="${FORTE_USE_64BIT_DATATYPES}" -DFORTE_USE_REAL_DATATYPE:STRING="${FORTE_USE_REAL_DATATYPE}" -DFORTE_USE_LREAL_DATATYPE:STRING="${FORTE_USE_LREAL_DATATYPE}" -DFORTE_SUPPORT_ARRAYS:STRING="${FORTE_SUPPORT_ARRAYS}" -DFORTE_LITTLE_ENDIAN:STRING=${FORTE_LITTLE_ENDIAN} -DFORTE_BIG_ENDIAN:STRING=${FORTE_BIG_ENDIAN} -DFORTE_LOGLEVEL:STRING="${FORTE_LOGLEVEL}" -P ${FORTE_BUILDSUPPORT_DIRECTORY}/generate_init.cmake)  #
 ADD_DEPENDENCIES (forte_init_generator forte_generate_modules_cmake_files)
 ADD_DEPENDENCIES (FORTE_LITE forte_init_generator)
 
@@ -300,7 +300,7 @@ ADD_CUSTOM_TARGET(forte_generate_modules_cmake_files COMMAND ${CMAKE_COMMAND}
   -DFORTE_MODULE_LIST:LISTS="${FORTE_MODULE_LIST}"
   -P ${FORTE_BUILDSUPPORT_DIRECTORY}/generate_modules_cmake_file.cmake)
 
-ADD_CUSTOM_TARGET(forte_stringlist_generator COMMAND ${CMAKE_COMMAND} -DFORTE_LINKED_STRINGDICT:STRING="${FORTE_LINKED_STRINGDICT}" -DFORTE_BINARY_DIR:STRING="${CMAKE_BINARY_DIR}" -DFORTE_SOURCE_DIR:STRING="${CMAKE_CURRENT_SOURCE_DIR}" -P ${FORTE_BUILDSUPPORT_DIRECTORY}/generate_stringlist.cmake)
+ADD_CUSTOM_TARGET(forte_stringlist_generator COMMAND ${CMAKE_COMMAND} -DFORTE_LINKED_STRINGDICT:STRING="${FORTE_LINKED_STRINGDICT}" -DFORTE_BINARY_DIR:STRING="${PROJECT_BINARY_DIR}" -DFORTE_SOURCE_DIR:STRING="${CMAKE_CURRENT_SOURCE_DIR}" -P ${FORTE_BUILDSUPPORT_DIRECTORY}/generate_stringlist.cmake)
 ADD_DEPENDENCIES (FORTE_LITE forte_stringlist_generator)
 ADD_DEPENDENCIES (forte_stringlist_generator forte_generate_modules_cmake_files)
 

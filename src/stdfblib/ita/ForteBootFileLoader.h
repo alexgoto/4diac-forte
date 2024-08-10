@@ -14,7 +14,7 @@
 #ifndef SRC_STDFBLIB_ITA_FORTEBOOTFILELOADER_H_
 #define SRC_STDFBLIB_ITA_FORTEBOOTFILELOADER_H_
 
-#include <stdio.h>
+#include "sdcard_io.h"
 #include <stdlib.h>
 
 class CIEC_STRING;
